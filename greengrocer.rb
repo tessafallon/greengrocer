@@ -33,7 +33,6 @@ def generateCart
 	rand(20).times do
 		$cart.push(ITEMS.sample)  
 	end
-	puts $cart
 end
 
 ##make hashes
@@ -51,7 +50,31 @@ end
 
 generateCart
 generateCoups
-item_no = $cart.each {|key| puts $cart.count(key)}
+
+var = $cart.each {|key| $cart.count(key)}
+
+$cart.each {|hash, values| 
+	hash.each {|key, new_hash| new_hash[:value]=$cart.count(hash)}}
+
+$cart.uniq!
+puts $cart
+
+	#delete duplicates
+
+
+
+#add item no to key
+
+#delete duplicate entries
+#replace old hashes with new hash that has new total
+
+def checkOut
+	#total cost
+	##if any of the items are on clearance add a 20% discount
+##if the customer has 2 of the same coupon, triple the discount
+##if none of the items purchased have a unit price greater than 5$ give the customer a 10$ discount off the whole cart
+	end
+
 
 
 
