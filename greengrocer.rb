@@ -41,39 +41,63 @@ end
 
 ##randomly generates set of coupons
 def generateCoups
-	coups = []
+	$coups = []
 	rand(2).times do
-		coups.push(COUPS.sample)
+		$coups.push(COUPS.sample)
 	end
-	puts coups
+	puts $coups
 end
 
 generateCart
+
+
+#find count, add to hash
+$cart.each {|hash, values| 
+	hash.each {|key, new_hash| 
+		new_hash[:value]=$cart.count(hash)}
+	}
+
+$cart.uniq! #remove dupes
+
+total = []
+$cart.each {|key| 
+	key.each_pair {|k, v|
+		total << v[:price]
+		}
+	}
+
+sub_total = total.inject(:+)
+#get values to array to sum
 generateCoups
 
-var = $cart.each {|key| $cart.count(key)}
-
-$cart.each {|hash, values| 
-	hash.each {|key, new_hash| new_hash[:value]=$cart.count(hash)}}
-
-$cart.uniq!
-puts $cart
-
-	#delete duplicates
+cart_names = []
+$cart.each {|key, value|
+key.each_pair {|k, v|
+cart_names << k}
+}
 
 
+coup_names = []
+$coups.each{|key, value| coup_names << key[:item]}
 
-#add item no to key
+puts cart_names #test
+puts $cart #test
+puts coup_names.class
 
-#delete duplicate entries
-#replace old hashes with new hash that has new total
+if $coup_names.any? {|name| name == cart_names[name]}
+puts "okay"
+end
 
-def checkOut
-	#total cost
-	##if any of the items are on clearance add a 20% discount
+#	if $coups.any? {|value| value === $cart[0]} #FIX: hash value to hash value
+#		puts "you get a discount of 20%"
+#	else
+#		puts "some thing here"
+#	end
+	#total
+#end
+	 	##if any of the items are on clearance add a 20% discount
 ##if the customer has 2 of the same coupon, triple the discount
 ##if none of the items purchased have a unit price greater than 5$ give the customer a 10$ discount off the whole cart
-	end
 
 
 
